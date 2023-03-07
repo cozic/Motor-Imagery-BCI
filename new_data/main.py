@@ -23,7 +23,7 @@ if __name__ == "__main__":
     # print(times.max())
 
     # Read the edf file.
-    file = "\\UCSD\\2023 winter semester\\COGS 189\\final project\\sourcedata\\rawdata\\S001\\S001R03.edf"
+    file = "/Users/lijianfeng/Documents/GitHub/Motor-Imagery-BCI/new_data/S001R03.edf"
     raw = mne.io.read_raw_edf(file)
     raw_data = raw.get_data()
     # get raw data info.
