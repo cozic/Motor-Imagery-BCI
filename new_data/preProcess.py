@@ -42,9 +42,13 @@ class preProcess:
         # visualize data after epoch.
         # epoch_raw.plot(block=True, scalings=dict(eeg=1e-4))
 
+    '''
+    filter and normalize the data
+    '''
     def filter(self):
         pass
 
     def labeling(self):
         pass
+
 
