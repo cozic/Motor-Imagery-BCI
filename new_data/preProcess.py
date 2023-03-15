@@ -46,7 +46,12 @@ class preProcess:
     filter and normalize the data
     '''
     def filter(self):
-        pass
+        # show graph and then try to use high-pass/low-pass
+        #fig, ax = np.plt.subplots(nrows=1, ncols=1, figsize=(20, 6))
+        epoch_raw.plot(block = True, scalings = dict(eeg=1e-4))
+
+        # pass
+        
 
     def labeling(self):
         pass
