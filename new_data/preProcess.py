@@ -47,11 +47,16 @@ class preProcess:
     '''
     def filter(self):
         # show graph and then try to use high-pass/low-pass
-        #fig, ax = np.plt.subplots(nrows=1, ncols=1, figsize=(20, 6))
-        
+
+        # file = "/Users/lijianfeng/Documents/GitHub/Motor-Imagery-BCI/new_data/S001R03.edf"
+        # raw = mne.io.read_raw_edf(file)
+        # low_cut = 0.1
+        # hi_cut  = 30
+
+        # raw_filt = raw.copy().filter(low_cut, hi_cut)
 
         pass
-        
+            
 
     def labeling(self):
         pass

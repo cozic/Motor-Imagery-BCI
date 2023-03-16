@@ -47,11 +47,12 @@ if __name__ == "__main__":
     # epoch data to range (-0.2, 0.8)
     epoch_raw = mne.Epochs(raw, target_event, tmin=-0.2, tmax=0.8, baseline=None)
     epoch_data = epoch_raw.get_data()
-    epoch_raw.plot(block = True, scalings = dict(eeg=1e-4))
     print(epoch_data.shape)
     print(target_event.shape)
     # visualize data after epoch.
-    #epoch_raw.plot(block=True, scalings=dict(eeg=1e-4))
+    
+    #epoch_raw.filter()
+    epoch_raw.plot(block=True, scalings=dict(eeg=1e-4))
 
 
     # '''
