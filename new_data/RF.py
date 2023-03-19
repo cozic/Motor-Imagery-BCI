@@ -2,9 +2,10 @@ import sklearn
 from sklearn.ensemble import RandomForestClassifier
 import numpy as np
 
+
 class RF:
-    def __init__(self, data):
-        self.training_set, self.testing_set = data
+    def __init__(self, training, testing):
+        self.training_set, self.testing_set = training, testing
         self.train_data = self.training_set[0]
         self.train_label = self.training_set[1]
         self.test_data = self.testing_set[0]
