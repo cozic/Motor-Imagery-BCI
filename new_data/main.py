@@ -59,8 +59,9 @@ if __name__ == "__main__":
     low_cut = 0.1
     hi_cut  = 30
     raw_filt = raw.copy().filter(low_cut, hi_cut)
+    raw_filt.plot(block=True, scalings=dict(eeg=1e-4))
 
-    epoch_raw.plot(block=True, scalings=dict(eeg=1e-4))
+    #epoch_raw.plot(block=True, scalings=dict(eeg=1e-4))
 
 
     # '''
