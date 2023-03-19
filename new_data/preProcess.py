@@ -50,10 +50,6 @@ class preProcess:
 
         # file = "/Users/lijianfeng/Documents/GitHub/Motor-Imagery-BCI/new_data/S001R03.edf"
         # raw = mne.io.read_raw_edf(file)
-        # low_cut = 0.1
-        # hi_cut  = 30
-
-        # raw_filt = raw.copy().filter(low_cut, hi_cut)
 
         pass
             
