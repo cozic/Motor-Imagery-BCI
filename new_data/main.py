@@ -24,7 +24,7 @@ if __name__ == "__main__":
 
     # Read the edf file.
     file = "/Users/lijianfeng/Documents/GitHub/Motor-Imagery-BCI/new_data/S001R03.edf"
-    raw = mne.io.read_raw_edf(file)
+    raw = mne.io.read_raw_edf(file, preload=True)
     #raw = mne.io.read_raw_edf(file,stim_channel='Event marker', misc=['Temp rectal'])
     #raw.load_data() 
     raw_data = raw.get_data()
@@ -65,13 +65,14 @@ if __name__ == "__main__":
     # raw_filt.plot(block=True, scalings=dict(eeg=1e-4))
 
     low_cut = 0.1
-    hi_cut  = 30
+    hi_cut  = 10
+
     raw_filt = epoch_raw.copy().filter(low_cut, hi_cut)
     raw_filt.plot(block=True, scalings=dict(eeg=1e-4))
 
     #raw.plot(block=True, scalings=dict(eeg=1e-4))
 
-    #epoch_raw.plot(block=True, scalings=dict(eeg=1e-4))
+    # epoch_raw.plot(block=True, scalings=dict(eeg=1e-4))
 
 
     # '''
