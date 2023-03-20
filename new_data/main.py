@@ -64,8 +64,14 @@ if __name__ == "__main__":
     # raw_filt = raw.copy().filter(low_cut, hi_cut)
     # raw_filt.plot(block=True, scalings=dict(eeg=1e-4))
 
-    low_cut = 8
-    hi_cut  = 30
+    fs = 240.0                      # Hz; sampling rate
+    dt = 1000. / fs                 # ms; time between samples
+    sdt = np.round(dt).astype(int); # rounded dt so that we can index samples
+    low_cut = 8                     # Hz; our low cut for our bandpass
+    hi_cut  = 30                    # Hz; our high cut for our bandpass
+    num_taps = 31                   # Number of taps/coefficients of FIR filter
+    N = len(raw_data)
+    normal_noise = np.random.normal(scale=sdt, size=N)
 
     raw_filt = epoch_raw.copy().filter(low_cut, hi_cut)
     raw_filt.plot(block=True, scalings=dict(eeg=1e-4))

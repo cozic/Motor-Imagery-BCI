@@ -54,7 +54,41 @@ class preProcess:
         pass
             
 
-    def labeling(self):
+    def labeling(self, event_dict, target_event):
+        task_labels = list(event_dict.keys())
+        labels = []
+        label_dict = {1: task_labels[0], 2: task_labels[1], 3: task_labels[2]}
+        for e in target_event:
+            labels.append(label_dict[e[-1]]) # e[-1]
+        #labels = np.array(labels)
+        #labels = labels.reshape((15, 1))
+        return labels
+
+    def one_hot_encoding(self, labels):
+        label_encoder = LabelEncoder()
+        integer_encoded = label_encoder.fit_transform(labels)
+        integer_encoded = integer_encoded.reshape(len(integer_encoded), 1)
+        onehot_encoder = OneHotEncoder(sparse=False)
+        onehot_encoded = onehot_encoder.fit_transform(integer_encoded)
+        return onehot_encoded
+
+
+    def to_dataframe(self, data, label):
         pass
+
+    def shuffle_and_split(self, data, label, train_percent):
+        # shape = np.array(data).shape
+        # data = np.array(data.reshape(shape[0], shape[1]*shape[2]))
+        label = np.array(label)
+        n_samples = len(data)
+        shuffle_index = np.random.permutation(n_samples)
+        np.random.shuffle(shuffle_index)
+        data, label = data[shuffle_index], label[shuffle_index]
+        training_range = int(n_samples*train_percent)
+        training_data, training_label, testing_data, testing_label = \
+            data[:training_range, :], label[:training_range],\
+            data[training_range:, :], label[training_range:]
+        return (training_data, training_label), (testing_data, testing_label)
+
 
 
