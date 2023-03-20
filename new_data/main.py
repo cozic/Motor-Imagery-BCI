@@ -64,8 +64,8 @@ if __name__ == "__main__":
     # raw_filt = raw.copy().filter(low_cut, hi_cut)
     # raw_filt.plot(block=True, scalings=dict(eeg=1e-4))
 
-    low_cut = 0.1
-    hi_cut  = 10
+    low_cut = 8
+    hi_cut  = 30
 
     raw_filt = epoch_raw.copy().filter(low_cut, hi_cut)
     raw_filt.plot(block=True, scalings=dict(eeg=1e-4))
