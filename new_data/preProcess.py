@@ -2,6 +2,7 @@ import mne
 import numpy as np
 import numpy.random
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder
+
 import pandas as pd
 '''
 Preprocess the EEG data, including epoching, filtering, and labeling the epoch with corresponding
@@ -38,21 +39,34 @@ class preProcess:
         target_event = [x for x in event_time if x[2] != 1]
         target_event = np.array(target_event)
         #print("target_event:", target_event.shape)
-
+        print(f"event dict:{event_dict}")
         # epoch data to range (-0.2, 0.8). Magic number to be fixed.
         self.epoch_raw = mne.Epochs(self.raw, target_event, tmin=-0.2, tmax=0.8, baseline=None)
         epoch_data = self.epoch_raw.get_data()
         #print("epoch_data:", epoch_data.shape)
-        return target_event, np.array(epoch_data), event_dict
+        return self.epoch_raw, target_event, event_dict
         # visualize data after epoch.
         # epoch_raw.plot(block=True, scalings=dict(eeg=1e-4))
 
     '''
     filter and normalize the data
     '''
-    def filter(self):
-        pass
+    def filter(self, lowpass_freq, highpass_freq, raw_data):
+        fft_data = np.fft.fft(raw_data, axis=1)
+        n_timepoints = raw_data.shape[1]
+        #print(n_timepoints.shape)
+        freqs = np.fft.fftfreq(int(n_timepoints), 1/self.sampling_freq)
+        low_cutoff = lowpass_freq
+        high_cutoff = highpass_freq
+        mask = (freqs >= low_cutoff) & (freqs <= high_cutoff)
 
+        #fft_data.filter(l_freq=None, h_freq=high_cutoff)
+        #fft_data.filter(l_freq=low_cutoff, h_freq=None)
+
+        filtered_fft = fft_data.copy()
+        filtered_fft[:, ~mask] = 0
+        filtered_data = np.fft.irfft(filtered_fft, axis=1).real
+        return filtered_data
     '''
     Produce the label vector with task name as labels. 
     '''
@@ -73,6 +87,9 @@ class preProcess:
         onehot_encoder = OneHotEncoder(sparse=False)
         onehot_encoded = onehot_encoder.fit_transform(integer_encoded)
         return onehot_encoded
+
+    def normalization(self):
+        pass
 
 
     def to_dataframe(self, data, label):
